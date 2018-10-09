@@ -16,4 +16,32 @@ public class Environment : MonoBehaviour {
 
         return gravitation;
     }
+
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+        ColliderCustom[] colliders;
+
+        colliders = Object.FindObjectsOfType<ColliderCustom>();
+
+        foreach (ColliderCustom c in colliders)
+        {
+            c.GenerateExtrusion();
+        }
+
+        foreach (ColliderCustom c in colliders)
+        {
+            foreach (ColliderCustom cc in colliders)
+            {
+                if (c != cc)
+                {
+                    c.CheckCollision(cc);
+                }
+            }
+        }
+    }
 }

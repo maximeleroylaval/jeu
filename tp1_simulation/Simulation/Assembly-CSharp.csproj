@@ -54,20 +54,22 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\BoxColliderCustom.cs" />
-     <Compile Include="Assets\Scripts\CircleColliderCustom.cs" />
+     <Compile Include="Assets\Scripts\ColliderCustom.cs" />
      <Compile Include="Assets\Scripts\Environment.cs" />
      <Compile Include="Assets\Scripts\Game.cs" />
+     <Compile Include="Assets\Scripts\RigidbodyCustom.cs" />
+     <Compile Include="Assets\Scripts\SphereColliderCustom.cs" />
  <Reference Include="UnityEditor.StandardEvents">
- <HintPath>D:/Dev/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
+ <HintPath>D:/Cours/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/UnityEditor.StandardEvents.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro.Editor">
- <HintPath>D:/Dev/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+ <HintPath>D:/Cours/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.PackageManagerUI.Editor">
- <HintPath>D:/Dev/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+ <HintPath>D:/Cours/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
  </Reference>
  <Reference Include="Unity.TextMeshPro">
- <HintPath>D:/Dev/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+ <HintPath>D:/Cours/jeu/tp1_simulation/Simulation/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
  </Reference>
  <Reference Include="UnityEngine.AIModule">
  <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
