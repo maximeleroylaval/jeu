@@ -109,7 +109,7 @@ MonoBehaviour:
   m_MinSize: {x: 915, y: 571}
   m_MaxSize: {x: 22010, y: 18021}
   vertical: 0
-  controlID: 26
+  controlID: 74
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_MinSize: {x: 640, y: 571}
   m_MaxSize: {x: 18010, y: 18021}
   vertical: 1
-  controlID: 27
+  controlID: 75
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -158,7 +158,7 @@ MonoBehaviour:
   m_MinSize: {x: 640, y: 471}
   m_MaxSize: {x: 18010, y: 14021}
   vertical: 0
-  controlID: 28
+  controlID: 76
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -233,7 +233,7 @@ MonoBehaviour:
   m_MinSize: {x: 234, y: 471}
   m_MaxSize: {x: 10004, y: 14021}
   vertical: 1
-  controlID: 53
+  controlID: 140
 --- !u!114 &11
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -440,14 +440,14 @@ MonoBehaviour:
     height: 484
   m_PersistentViewDataDictionary: {fileID: 0}
   m_SceneLighting: 1
-  lastFramingTime: 39.9946948502664
+  lastFramingTime: 58.06379759347765
   m_2DMode: 0
   m_isRotationLocked: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 0, y: 0, z: 0}
+    m_Target: {x: -0.45325166, y: 2.817053, z: -15.62933}
     speed: 2
-    m_Value: {x: 0, y: 0, z: 0}
+    m_Value: {x: -0.45325166, y: 2.817053, z: -15.62933}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -479,9 +479,9 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.11639189, y: 0.19969416, z: -0.023896178, w: -0.972636}
   m_Size:
-    m_Target: 22
+    m_Target: 8.029203
     speed: 2
-    m_Value: 22
+    m_Value: 8.029203
   m_Ortho:
     m_Target: 1
     speed: 2
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 2a0c0000
-    m_LastClickedID: 3114
+    m_SelectedIDs: 3c0c0000
+    m_LastClickedID: 3132
     m_ExpandedIDs: e6fbffff000000004e0c00007e0c0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -607,7 +607,8 @@ MonoBehaviour:
     m_ScenePaths: []
     m_ShowAllHits: 0
     m_SearchArea: 1
-    m_Folders: []
+    m_Folders:
+    - Assets/Scripts
   m_ViewMode: 0
   m_StartGridSize: 64
   m_LastFolders: []
