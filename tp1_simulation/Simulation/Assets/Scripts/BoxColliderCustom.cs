@@ -6,6 +6,7 @@ public class BoxColliderCustom : ColliderCustom
 {
     public Vector3 Center;
     public Vector3 Size = new Vector3(1, 1, 1);
+    public float Precision = 0.1f;
 
     public bool stop = false;
 
@@ -84,54 +85,80 @@ public class BoxColliderCustom : ColliderCustom
         return new Vector3(ab.y * ac.z - ac.y * ab.z, ab.z * ac.x - ab.x * ac.z, ab.x * ac.y - ac.x * ab.y);
     }
 
-    public bool CheckPointContact(Vector3 res)
+    public void TimePrint(Vector3 value)
     {
         if (this.stop == true)
         {
-            return false;
+            return;
         }
-        Vector3 boundsPos = this.Center + this.transform.position + 0.5f * this.Size;
-        Vector3 boundsNeg = this.Center + this.transform.position + -0.5f * this.Size;
-
-        Debug.Log("Position: " + this.transform.position);
-        Debug.Log("Pos:" + boundsPos);
-        Debug.Log("Neg:" + boundsNeg);
-
+        Debug.Log("Vector3 = " + value);
         this.stop = true;
+    }
 
-        return res.x <= boundsPos.x && res.x >= boundsNeg.x && res.y <= boundsPos.y && res.y >= boundsNeg.y && res.z <= boundsPos.z && res.z >= boundsNeg.z;
+    public bool CheckPlane(Vector3[] tops, Vector3 segmentVV, Vector3 segmentVH, Vector3 inPlane, Vector3 normal)
+    {
+        Vector3 pointH, pointV;
+        Vector3 zero = new Vector3(0, 0, 0);
+
+        pointV = tops[0];
+        for (float alphaV = 0f; alphaV < 1.0f; alphaV += this.Precision)
+        {
+            pointV = tops[0] + alphaV * segmentVV;
+
+            for (float alphaH = 0f; alphaH < 1.0f; alphaH += this.Precision)
+            {
+                pointH = pointV + alphaH * segmentVH;
+
+                Vector3 toCheck = this.CrossProduct(pointH, normal);
+                Vector3 res = inPlane - toCheck;
+
+                if (res == zero)
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public Vector3 GetNormal(Vector3[] face)
+    {
+        Vector3 ab = face[1] - face[0];
+        Vector3 ac = face[2] - face[1];
+
+        Vector3 normalUp = this.CrossProduct(ab, ac);
+
+        float normalDown = Mathf.Sqrt(Mathf.Pow(normalUp.x, 2) + Mathf.Pow(normalUp.y, 2) + Mathf.Pow(normalUp.z, 2));
+
+        Vector3 normal = normalUp / normalDown;
+
+        return normal;
     }
 
     public bool CheckFaces(Vector3[] tops)
     {
-        bool collide = false;
+        Vector3 segmentVH = tops[1] - tops[0];
+        Vector3 segmentVV = tops[3] - tops[0];
 
         Vector3[][] faces = this.GetFaces();
 
-        foreach(Vector3[] face in faces)
+        Vector3 normal = this.GetNormal(faces[0]);
+
+        Vector3 segmentVD = faces[1][0] - faces[0][0];
+        Vector3 pointD = faces[0][0];
+
+        for (float alphaD = 0f; alphaD < 1.0f; alphaD += this.Precision)
         {
-            Vector3 ab = face[1] - face[0];
-            Vector3 ac = face[2] - face[1];
-            Vector3 normalUp = this.CrossProduct(ab, ac);
-            float normalDown = Mathf.Sqrt(Mathf.Pow(normalUp.x, 2) + Mathf.Pow(normalUp.y, 2) + Mathf.Pow(normalUp.z, 2));
-            Vector3 normal = normalUp / normalDown;
+            pointD = faces[0][0] + alphaD * segmentVD;
+            Vector3 inPlane = this.CrossProduct(pointD, normal);
 
-            Vector3 segmentV = tops[1] - tops[0];
-            Vector3 point = tops[0];
-
-            for (float increment = 0f; increment < 1.0f; increment += 0.01f)
+            if (this.CheckPlane(tops, segmentVV, segmentVH, inPlane, normal) == true)
             {
-                point = tops[0] + increment * segmentV;
-                Vector3 res = this.CrossProduct(point, normal);
-
-                if (this.CheckPointContact(res) == true)
-                {
-                    Debug.Log("Contact ?");
-                }
+                return true;
             }
         }
 
-        return collide;
+        return false;
     }
 
     public override void CheckCollision(ColliderCustom c)
