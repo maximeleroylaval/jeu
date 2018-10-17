@@ -53,7 +53,7 @@ public class SphereColliderCustom : ColliderCustom {
     {
         if (c is BoxColliderCustom && this.CheckPoints(((BoxColliderCustom)c).GetAllPoints()))
         {
-            Debug.Log("Collide");
+            this.GetComponent<RigidbodyCustom>().stopMovement();
         }
     }
 }

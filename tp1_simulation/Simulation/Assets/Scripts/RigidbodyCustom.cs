@@ -44,4 +44,10 @@ public class RigidbodyCustom : MonoBehaviour {
     {
         this.velocity = new Vector3(this.velocity.x, this.velocity.y + (this.acceleration.y * Time.deltaTime), this.velocity.z);
     }
+
+    public void stopMovement()
+    {
+        this.velocity = Vector3.zero;
+        UseGravity = false;
+    }
 }

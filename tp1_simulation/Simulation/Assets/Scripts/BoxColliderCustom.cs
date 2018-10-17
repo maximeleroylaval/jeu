@@ -152,13 +152,13 @@ public class BoxColliderCustom : ColliderCustom
     public override void CheckCollision(ColliderCustom c)
     {
         Vector3[][] faces = this.GetFaces();
+        
 
         foreach(Vector3[] face in faces)
         {
             if (c is BoxColliderCustom && ((BoxColliderCustom)c).CheckFace(face))
             {
-                Debug.Log("Collide");
-                break;
+                //Debug.Log("Collide");
             }
         }
     }
