@@ -7,6 +7,7 @@ public class RigidbodyCustom : MonoBehaviour {
     private Vector3 velocity;
     private Vector3 acceleration;
     private Bounds bounds;
+    private Vector3 lastPosition;
 
     public float Mass = 1;
     public bool UseGravity = true;
@@ -30,24 +31,38 @@ public class RigidbodyCustom : MonoBehaviour {
         }
     }
 
-    void SetPosition(Vector3 position)
+    public void SetPosition(Vector3 position)
     {
-        this.transform.position = new Vector3(position.x, position.y + (this.velocity.y * Time.deltaTime) + (0.5f * this.acceleration.y * Mathf.Pow(Time.deltaTime, 2)), position.z);
+        this.lastPosition = this.transform.position;
+        this.transform.position = position + (this.velocity * Time.deltaTime) + (0.5f * this.acceleration * Mathf.Pow(Time.deltaTime, 2));
     }
 
-    void SetAcceleration(Vector3 forces)
+    public void SetAcceleration(Vector3 forces)
     {
-        this.acceleration = new Vector3(this.acceleration.x, forces.y, this.acceleration.z);
+        this.acceleration = forces;
     }
 
     void SetVelocity()
     {
-        this.velocity = new Vector3(this.velocity.x, this.velocity.y + (this.acceleration.y * Time.deltaTime), this.velocity.z);
+        this.velocity = velocity + (this.acceleration * Time.deltaTime);
     }
 
-    public void stopMovement()
+    public void SetVelocity(Vector3 velocity)
     {
-        this.velocity = Vector3.zero;
+        this.velocity = velocity;
+    }
+
+    public void StopMovement()
+    {
+        this.transform.position = this.lastPosition;
         UseGravity = false;
+    }
+    public void BounceMovement(float BounceCoef, Vector3 normale)
+    {
+        this.transform.position = this.lastPosition;
+
+        Vector3 result = BounceCoef * (this.velocity - (2f * Vector3.Dot(normale, this.velocity) * normale));
+
+        this.velocity = result;
     }
 }

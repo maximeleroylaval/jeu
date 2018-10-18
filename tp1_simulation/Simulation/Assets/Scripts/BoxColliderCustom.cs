@@ -8,7 +8,7 @@ public class BoxColliderCustom : ColliderCustom
     public Vector3 Size = new Vector3(1, 1, 1);
     public float Precision = 0.1f;
 
-    public bool stop = false;
+    public bool Stop = false;
 
 	// Use this for initialization
 	void Start () {
@@ -149,16 +149,68 @@ public class BoxColliderCustom : ColliderCustom
         return false;
     }
 
+    public Vector3[] GetFace(List<Vector3> points)
+    {
+        Vector3[] face = new Vector3[3];
+        int i = 0;
+
+        foreach (Vector3 v in points)
+        {
+            if (i == 0)
+            {
+                face[i] = v;
+                i++;
+            }
+            else if (i == 1 || i == 2)
+            {
+                if ((v.x != face[0].x && v.y != face[0].y)
+                    || (v.x != face[0].x && v.z != face[0].z)
+                    || (v.y != face[0].y && v.z != face[0].z))
+                {
+                    face[i] = v;
+                    i++;
+                }
+            }
+            else if (i == 3)
+            {
+                break;
+            }
+        }
+
+        return (face);
+    }
+
+    public Vector3 GetNormal(Vector3[] face)
+    {
+        Vector3 ab = face[1] - face[0];
+        Vector3 ac = face[2] - face[0];
+
+        Vector3 normalUp = Vector3.Cross(ab, ac);
+
+        if (normalUp == Vector3.zero)
+        {
+            return Vector3.zero;
+        }
+
+        float normalDown = Mathf.Sqrt(Mathf.Pow(normalUp.x, 2) + Mathf.Pow(normalUp.y, 2) + Mathf.Pow(normalUp.z, 2));
+
+        Vector3 normal = normalUp / normalDown;
+
+        return normal;
+    }
+
     public override void CheckCollision(ColliderCustom c)
     {
         Vector3[][] faces = this.GetFaces();
         
-
         foreach(Vector3[] face in faces)
         {
             if (c is BoxColliderCustom && ((BoxColliderCustom)c).CheckFace(face))
             {
-                //Debug.Log("Collide");
+                if (this.Stop)
+                {
+                    this.GetComponent<RigidbodyCustom>().StopMovement();
+                }
             }
         }
     }

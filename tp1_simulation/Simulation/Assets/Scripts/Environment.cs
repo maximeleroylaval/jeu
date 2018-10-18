@@ -30,11 +30,6 @@ public class Environment : MonoBehaviour {
 
         foreach (ColliderCustom c in colliders)
         {
-            c.GenerateExtrusion();
-        }
-
-        foreach (ColliderCustom c in colliders)
-        {
             foreach (ColliderCustom cc in colliders)
             {
                 if (c != cc)
