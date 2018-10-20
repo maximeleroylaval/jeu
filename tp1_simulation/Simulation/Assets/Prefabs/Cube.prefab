@@ -98,7 +98,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Center: {x: 0, y: 0, z: 0}
   Size: {x: 1, y: 1, z: 1}
-  Precision: 0.2
+  Precision: 0.5
   Stop: 1
 --- !u!114 &114790696336129700
 MonoBehaviour:

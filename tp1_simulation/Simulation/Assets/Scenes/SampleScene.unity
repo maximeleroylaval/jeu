@@ -629,7 +629,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Center: {x: 0, y: 0, z: 0}
   Size: {x: 1, y: 1, z: 1}
-  Precision: 0.02
+  Precision: 0.07
   Stop: 0
 --- !u!23 &1858724598
 MeshRenderer:
