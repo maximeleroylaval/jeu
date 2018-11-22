@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Bomb : MonoBehaviour {
+public class Bomb : NetworkBehaviour {
 
     public int range = 1;
     public float waitExplode = 2.5f;
@@ -10,7 +11,7 @@ public class Bomb : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        Invoke("Explode", this.waitExplode);
+        Invoke("CmdExplode", this.waitExplode);
     }
 	
 	// Update is called once per frame
@@ -18,7 +19,8 @@ public class Bomb : MonoBehaviour {
 
     }
 
-    void Explode()
+    [Command]
+    void CmdExplode()
     {
         for (int i = 0; i < this.range; i++)
         {
@@ -28,11 +30,16 @@ public class Bomb : MonoBehaviour {
         Destroy(this.gameObject);
     }
 
+    void Activate()
+    {
+        GetComponent<BoxCollider>().isTrigger = false;
+    }
+
     void OnTriggerExit(Collider other)
     {
         if (other.gameObject.tag == "Player")
         {
-            GetComponent<BoxCollider>().isTrigger = false;
+            this.Activate();
         }
     }
 }

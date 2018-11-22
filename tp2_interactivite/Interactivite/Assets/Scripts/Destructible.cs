@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class Destructible : MonoBehaviour {
+public class Destructible : NetworkBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -14,9 +15,15 @@ public class Destructible : MonoBehaviour {
 		
 	}
 
+    [Command]
+    void CmdExplode()
+    {
+        Destroy(this.gameObject);
+    }
+
     void OnParticleCollision(GameObject other)
     {
         if (other.tag == "Explosive")
-            Destroy(this.gameObject);
+            this.CmdExplode();
     }
 }

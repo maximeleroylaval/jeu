@@ -8,6 +8,14 @@ TagManager:
   - Explosive
   - PlayerIA
   - GameManager
+  - IP
+  - Connection
+  - Disconnect
+  - NetworkManager
+  - SoloMenu
+  - OnlineMenu
+  - InGameMenu
+  - ChoiceMenu
   layers:
   - Default
   - TransparentFX

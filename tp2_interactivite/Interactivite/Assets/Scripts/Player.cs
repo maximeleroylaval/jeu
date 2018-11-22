@@ -10,6 +10,7 @@ public class Player : NetworkBehaviour {
     public List<GameObject> bombs;
 
     private bool dead = false;
+    private string pseudo = "Player";
 
 	// Use this for initialization
 	void Start () {
@@ -23,11 +24,10 @@ public class Player : NetworkBehaviour {
 
     public virtual void Die()
     {
-        string toDisplay = this.gameObject.name + " just died like a noob";
+        string toDisplay = this.GetPseudo() + " just died like a noob";
         GameObject.Find("Canvas").GetComponent<Canvas>().GetComponent<TextAnnouncer>().Display(toDisplay);
         this.dead = true;
         this.gameObject.SetActive(false);
-        //Destroy(this.gameObject);
     }
 
     public virtual Vector3 GetDirection()
@@ -57,7 +57,6 @@ public class Player : NetworkBehaviour {
         {
             GameObject bomb = Instantiate(bombPrefab, new Vector3(this.transform.position.x - 1.14f, 0.087f, this.transform.position.z), Quaternion.identity);
             bomb.transform.parent = transform.parent;
-            bomb.GetComponent<BoxCollider>().isTrigger = true;
             this.bombs.Add(bomb);
             NetworkServer.Spawn(bomb);
         }
@@ -88,6 +87,16 @@ public class Player : NetworkBehaviour {
 
         if (this.CanBomb())
             this.CmdBomb();
+    }
+
+    public string GetPseudo()
+    {
+        return this.pseudo;
+    }
+
+    public void SetPseudo(string name)
+    {
+        this.pseudo = name;
     }
 
     void OnParticleCollision(GameObject other)

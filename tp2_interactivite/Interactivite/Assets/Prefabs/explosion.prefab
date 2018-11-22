@@ -20,8 +20,9 @@ GameObject:
   m_Component:
   - component: {fileID: 4981663578437396}
   - component: {fileID: 198080821265904906}
+  - component: {fileID: 114500978255087396}
   - component: {fileID: 199854532970980830}
-  - component: {fileID: 114034788761229700}
+  - component: {fileID: 114018973072872998}
   m_Layer: 0
   m_Name: explosion
   m_TagString: Explosive
@@ -42,7 +43,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
---- !u!114 &114034788761229700
+--- !u!114 &114018973072872998
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -53,6 +54,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22bd13e9d07a2e24497000456b903a7e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114500978255087396
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1792577296176272}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 190
+    i1: 183
+    i2: 247
+    i3: 87
+    i4: 160
+    i5: 91
+    i6: 88
+    i7: 148
+    i8: 217
+    i9: 175
+    i10: 203
+    i11: 12
+    i12: 204
+    i13: 162
+    i14: 195
+    i15: 113
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!198 &198080821265904906
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -67,7 +100,7 @@ ParticleSystem:
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
-  autoRandomSeed: 1
+  autoRandomSeed: 0
   useRigidbodyForVelocity: 1
   startDelay:
     serializedVersion: 2
@@ -707,7 +740,7 @@ ParticleSystem:
     sphericalDirectionAmount: 0
     randomPositionAmount: 0
     radius:
-      value: 0.3
+      value: 0.5
       mode: 0
       spread: 0
       speed:
