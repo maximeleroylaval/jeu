@@ -18,6 +18,7 @@ public class TextAnnouncer : MonoBehaviour {
 
     public void Display(string toDisplay)
     {
+        this.ClearText();
         canvasText.text = toDisplay;
         Invoke("ClearText", this.displayTime);
     }

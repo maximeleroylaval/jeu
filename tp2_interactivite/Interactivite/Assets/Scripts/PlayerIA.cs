@@ -1,25 +1,27 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
-public class PlayerIA : MonoBehaviour {
-    public float speed = 2.0f;
-    public int bombLimit = 1;
-    public GameObject bombPrefab;
+public class PlayerIA : Player {
+
     public GameObject player;
-    public List<GameObject> bombs;
     
-    Vector3 lastPos;
+    private Vector3 lastPos;
 
-    bool CanBomb()
-    {
-        if (this.bombs.Count < this.bombLimit)
-            return true;
-        return false;
-    }
+    // Use this for initialization
+    void Start () {
+        this.lastPos = transform.position;
+	}
 
     Vector3 ChasePlayer()
     {
+        if (this.player == null)
+        {
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            if (players.Length <= 0)
+                return Vector3.zero;
+            else
+                this.player = players[0];
+        }
+
         Vector3 direction = (player.transform.position - transform.position).normalized;
 
         if (direction.x < 0)
@@ -54,78 +56,23 @@ public class PlayerIA : MonoBehaviour {
         return Vector3.left;
     }
 
+    public override Vector3 GetDirection()
+    {
+        // BOMB TOO CLOSE
+        if (this.bombs.Count > 0 && this.bombs[0] != null && Vector3.Distance(transform.position, this.bombs[0].transform.position) > 0.7)
+            return HideFromBomb();
+        return ChasePlayer();
+    }
 
-    // Use this for initialization
-    void Start () {
-        
-	}
-	
-	// Update is called once per frame
-	void Update () {
-
-        Vector3 direction;
+    // Update is called once per frame
+    void Update () {
         Vector3 currentPos = transform.position;
 
-
-
-
         if (Vector3.Distance(currentPos, lastPos) < 1)
-        {
-            if (this.CanBomb())
-            {
-                GameObject bomb = Instantiate(bombPrefab, new Vector3(this.transform.position.x - 1.14f, 0.087f, this.transform.position.z), Quaternion.identity);
-                bomb.transform.parent = transform.parent;
-                bomb.GetComponent<BoxCollider>().isTrigger = true;
-                this.bombs.Add(bomb);
-            }
-        }
-        
-        if (this.bombs.Count > 0 && this.bombs[0] != null && Vector3.Distance(transform.position, this.bombs[0].transform.position) > 0.7) // BOMB TOO CLOSE
-        {
-            direction = HideFromBomb();
-        }
-        else
-        {
-            direction = ChasePlayer();
-        }
+            this.CmdBomb();
 
-        transform.rotation = Quaternion.LookRotation(direction);
-        transform.Translate(Vector3.forward * Time.deltaTime * speed);
+        this.Move();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        for (int i = this.bombs.Count - 1; i >= 0; i--)
-        {
-            if (this.bombs[i] == null)
-                this.bombs.RemoveAt(i);
-        }
         lastPos = currentPos;
     }
-
-    void OnParticleCollision(GameObject other)
-    {
-        if (other.tag == "Explosive")
-            this.Die();
-    }
-    public void Die()
-    {
-        string toDisplay = this.gameObject.name + " just died like a noob";
-        GameObject.Find("Canvas").GetComponent<Canvas>().GetComponent<TextAnnouncer>().Display(toDisplay);
-        Destroy(this.gameObject);
-    }
-
 }

@@ -55,6 +55,7 @@ GameObject:
   - component: {fileID: 4269512959720280}
   - component: {fileID: 65305804538045032}
   - component: {fileID: 114046998685539704}
+  - component: {fileID: 114952908782838456}
   m_Layer: 0
   m_Name: bomb
   m_TagString: Untagged
@@ -287,3 +288,35 @@ MonoBehaviour:
   waitExplode: 2.5
   explosionPrefab: {fileID: 1792577296176272, guid: beb7f757a05b5894d9afcb0ccca2c371,
     type: 2}
+--- !u!114 &114952908782838456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539078274154060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 230
+    i1: 43
+    i2: 108
+    i3: 232
+    i4: 68
+    i5: 131
+    i6: 39
+    i7: 100
+    i8: 138
+    i9: 4
+    i10: 101
+    i11: 105
+    i12: 169
+    i13: 251
+    i14: 241
+    i15: 7
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
