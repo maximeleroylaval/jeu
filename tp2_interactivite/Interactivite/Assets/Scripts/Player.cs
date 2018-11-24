@@ -7,10 +7,9 @@ public class Player : NetworkBehaviour {
     public float speed = 2.0f;
     public int bombLimit = 1;
     public GameObject bombPrefab;
+    public Dictionary<ControlInput, string> control;
     public List<GameObject> bombs;
 
-    Controls ControlManager = new Controls();
-    Dictionary<ControlInput, string> control;
 
     private bool dead = false;
     private string pseudo = "Player";
@@ -27,7 +26,14 @@ public class Player : NetworkBehaviour {
 
     public virtual void ChooseCommand(int nb)
     {
-        control = ControlManager.GetControl(nb);
+        if (nb == 0)
+        {
+            control = Controls.Control1;
+        }
+        if (nb == 1)
+        {
+            control = Controls.Control2;
+        }
     }
 
     public virtual void Die()

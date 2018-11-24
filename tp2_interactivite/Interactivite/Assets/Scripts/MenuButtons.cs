@@ -12,10 +12,7 @@ public class MenuButtons : MonoBehaviour {
 
     public GameObject prefabCommandElement;
 
-    public Controls ControlManager = new Controls();
 
-    public int nbPlayers = 0;
-    public int nbPlayersIA = 0;
 
     void Start () {
         MenuPanel.SetActive(true);
@@ -40,8 +37,10 @@ public class MenuButtons : MonoBehaviour {
 
     public void ShowCommandPanel(int nb)
     {
-       
-        Dictionary<ControlInput, string> control = ControlManager.GetControl(0);
+
+        Dictionary<ControlInput, string> control = new Dictionary<ControlInput, string>();
+
+        control = Controls.Control1;
 
         foreach (KeyValuePair<ControlInput, string> el in control)
         {
@@ -49,9 +48,13 @@ public class MenuButtons : MonoBehaviour {
             commandElement.transform.SetParent(CommandsPanel.transform, false);
 
             ElementCommand element = commandElement.GetComponent<ElementCommand>();
+
             element.NameCommand.text = el.Key.ToString();
             element.AtributionCommand.text = el.Value;
+            element.NewCommand.onClick.AddListener(() => { SetNewCommand(element); });
+
         }
+
 
         OptionsPanel.SetActive(false);
         CommandsPanel.SetActive(true);
@@ -59,17 +62,14 @@ public class MenuButtons : MonoBehaviour {
 
     }
 
-    public void SetNewCommand(string command)
+    public void SetNewCommand(ElementCommand el)
     {
         NewCommandPanel.SetActive(true);
+        NewCommandPanel.AddComponent<KeyListener>();
 
-        if (Input.anyKey)
-            {
-                Debug.Log(Input.inputString);
-            }
 
-        NewCommandPanel.SetActive(false);
 
+        //Controls.SetCommand(0, el)
     }
 
     public void Exit()
