@@ -78,6 +78,8 @@ public class MyNetworkManager : NetworkManager {
             }
         }
 
+        Debug.Log(i);
+
         if (i != -1)
         {
             NetworkStartPosition[] spawns = GameObject.FindObjectsOfType<NetworkStartPosition>();

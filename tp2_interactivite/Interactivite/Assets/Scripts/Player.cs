@@ -9,17 +9,25 @@ public class Player : NetworkBehaviour {
     public GameObject bombPrefab;
     public List<GameObject> bombs;
 
+    Controls ControlManager = new Controls();
+    Dictionary<ControlInput, string> control;
+
     private bool dead = false;
     private string pseudo = "Player";
 
 	// Use this for initialization
 	void Start () {
-
+        ChooseCommand(0);           
 	}
 
     public virtual bool Dead()
     {
         return this.dead;
+    }
+
+    public virtual void ChooseCommand(int nb)
+    {
+        control = ControlManager.GetControl(nb);
     }
 
     public virtual void Die()
@@ -32,20 +40,20 @@ public class Player : NetworkBehaviour {
 
     public virtual Vector3 GetDirection()
     {
-        if (Input.GetKey("right"))
+        if (Input.GetKey(control[ControlInput.RIGHT]))
             return Vector3.right;
-        else if (Input.GetKey("left"))
+        else if (Input.GetKey(control[ControlInput.LEFT]))
             return Vector3.left;
-        else if (Input.GetKey("up"))
+        else if (Input.GetKey(control[ControlInput.UP]))
             return Vector3.forward;
-        else if (Input.GetKey("down"))
+        else if (Input.GetKey(control[ControlInput.DOWN]))
             return -Vector3.forward;
         return Vector3.zero;
     }
 
     public virtual bool CanBomb()
     {
-        if (Input.GetKey("space"))
+        if (Input.GetKey(control[ControlInput.BOMB]))
             return true;
         return false;
     }

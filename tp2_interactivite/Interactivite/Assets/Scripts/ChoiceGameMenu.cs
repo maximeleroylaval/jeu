@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ChoiceGameMenu : MonoBehaviour {
 
@@ -27,5 +28,10 @@ public class ChoiceGameMenu : MonoBehaviour {
     {
         this.gameObject.SetActive(false);
         this.OnlineMenu.SetActive(true);
+    }
+
+    public void BackToMenu()
+    {
+        SceneManager.LoadScene("Scenes/Menu");
     }
 }
