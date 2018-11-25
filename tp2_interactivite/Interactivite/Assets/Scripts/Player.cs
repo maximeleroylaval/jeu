@@ -7,33 +7,20 @@ public class Player : NetworkBehaviour {
     public float speed = 2.0f;
     public int bombLimit = 1;
     public GameObject bombPrefab;
-    public Dictionary<ControlInput, string> control;
     public List<GameObject> bombs;
 
 
+    public int NumberPlayer;
     private bool dead = false;
     private string pseudo = "Player";
 
 	// Use this for initialization
 	void Start () {
-        ChooseCommand(0);           
 	}
 
     public virtual bool Dead()
     {
         return this.dead;
-    }
-
-    public virtual void ChooseCommand(int nb)
-    {
-        if (nb == 0)
-        {
-            control = Controls.Control1;
-        }
-        if (nb == 1)
-        {
-            control = Controls.Control2;
-        }
     }
 
     public virtual void Die()
@@ -46,20 +33,20 @@ public class Player : NetworkBehaviour {
 
     public virtual Vector3 GetDirection()
     {
-        if (Input.GetKey(control[ControlInput.RIGHT]))
+        if (Input.GetKey(ControlManager.CM.Controls[NumberPlayer].right))
             return Vector3.right;
-        else if (Input.GetKey(control[ControlInput.LEFT]))
+        else if (Input.GetKey(ControlManager.CM.Controls[NumberPlayer].left))
             return Vector3.left;
-        else if (Input.GetKey(control[ControlInput.UP]))
+        else if (Input.GetKey(ControlManager.CM.Controls[NumberPlayer].forward))
             return Vector3.forward;
-        else if (Input.GetKey(control[ControlInput.DOWN]))
+        else if (Input.GetKey(ControlManager.CM.Controls[NumberPlayer].backward))
             return -Vector3.forward;
         return Vector3.zero;
     }
 
     public virtual bool CanBomb()
     {
-        if (Input.GetKey(control[ControlInput.BOMB]))
+        if (Input.GetKey(ControlManager.CM.Controls[NumberPlayer].bomb))
             return true;
         return false;
     }

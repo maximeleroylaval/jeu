@@ -85,6 +85,7 @@ public class MyNetworkManager : NetworkManager {
             NetworkStartPosition[] spawns = GameObject.FindObjectsOfType<NetworkStartPosition>();
             GameObject player = Instantiate(playerPrefab, spawns[i].transform.position, spawns[i].transform.rotation);
             player.GetComponent<Player>().SetPseudo("Player " + (i + 1));
+            player.GetComponent<Player>().NumberPlayer = 0;
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
             activeSpawns[i] = conn;
         }
