@@ -3,13 +3,13 @@
 public class PlayerIA : Player {
 
     public GameObject player;
-    
+
     private Vector3 lastPos;
 
     // Use this for initialization
-    void Start () {
+    void Start() {
         this.lastPos = transform.position;
-	}
+    }
 
     Vector3 ChasePlayer()
     {
@@ -38,30 +38,51 @@ public class PlayerIA : Player {
 
     Vector3 HideFromBomb()
     {
-        // TODO
-        /*RaycastHit objectHit;
+        bool check = false;
+        RaycastHit objectHit;
 
         Vector3 fwd = transform.TransformDirection(Vector3.forward);
-        Debug.Log("HERE");
-        Debug.DrawRay(transform.position, fwd * 50, Color.green, 20, true);
         if (Physics.Raycast(transform.position, fwd, out objectHit, 50))
         {
             Debug.Log(objectHit.collider.name);
-            if (objectHit.collider.name == "Enemy")
+            if (objectHit.collider.name.Contains("boxdestroy"))
             {
-                Debug.Log("Close to enemy");
+                Vector3 direction = objectHit.collider.transform.position;
+                if (Vector3.Distance(transform.position, direction) > 1)
+                {
+                    if (direction.x < 0)
+                        return Vector3.left;
+                    else if (direction.x <= 0)
+                        return Vector3.right;
+                    else if (direction.z >= 0)
+                        return Vector3.forward;
+                    else if (direction.z < 0)
+                        return Vector3.back;
+                }
+                check = true;
             }
-        }*/
+        }
 
-        return Vector3.left;
+        if (!check)
+        {
+            transform.Rotate(0, 90, 0);
+
+            Vector3 direction = ((transform.rotation * Quaternion.Euler(0, 90, 0)) * transform.rotation) * Vector3.forward;
+            return direction;
+        }
+        
+
+
+        return Vector3.zero;
+    
     }
 
     public override Vector3 GetDirection()
     {
         // BOMB TOO CLOSE
-        if (this.bombs.Count > 0 && this.bombs[0] != null && Vector3.Distance(transform.position, this.bombs[0].transform.position) > 0.7)
+        //if (this.bombs.Count > 0 && this.bombs[0] != null && Vector3.Distance(transform.position, this.bombs[0].transform.position) > 0.35)
             return HideFromBomb();
-        return ChasePlayer();
+        //return ChasePlayer();
     }
 
     // Update is called once per frame
@@ -69,9 +90,9 @@ public class PlayerIA : Player {
         Vector3 currentPos = transform.position;
 
         if (Vector3.Distance(currentPos, lastPos) < 1)
-            this.CmdBomb();
+            CmdBomb();
 
-        this.Move();
+        Move();
 
         lastPos = currentPos;
     }
