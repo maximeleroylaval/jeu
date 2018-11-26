@@ -16,6 +16,7 @@ TagManager:
   - OnlineMenu
   - InGameMenu
   - ChoiceMenu
+  - Bomb
   layers:
   - Default
   - TransparentFX

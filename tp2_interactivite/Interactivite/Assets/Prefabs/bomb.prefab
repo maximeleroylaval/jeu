@@ -56,9 +56,10 @@ GameObject:
   - component: {fileID: 65305804538045032}
   - component: {fileID: 114046998685539704}
   - component: {fileID: 114952908782838456}
+  - component: {fileID: 208309509442872824}
   m_Layer: 0
   m_Name: bomb
-  m_TagString: Untagged
+  m_TagString: Bomb
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -320,3 +321,18 @@ MonoBehaviour:
     i15: 7
   m_ServerOnly: 0
   m_LocalPlayerAuthority: 1
+--- !u!208 &208309509442872824
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1539078274154060}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 2.4, y: 1, z: 2.4}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 2.22, y: 0.24, z: 0}
+  m_TimeToStationary: 0.5

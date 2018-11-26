@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
 
 public class MyGameManager : NetworkBehaviour
@@ -12,11 +11,20 @@ public class MyGameManager : NetworkBehaviour
     private List<GameObject> playerIAs = new List<GameObject>();
     private bool started = false;
     private bool won = false;
+    private bool ready = false;
 
     // Use this for initialization
     void Start()
     {
 
+    }
+
+    public void GameStartLocal(int players)
+    {
+        GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManagerHUD>().StartHost(true);
+        ClientScene.AddPlayer(NetworkClient.allClients[0].connection, 1);
+        this.started = true;
+        this.CmdSpawnIAs();
     }
 
     public void ToggleIA()
@@ -62,14 +70,6 @@ public class MyGameManager : NetworkBehaviour
         return playersAlive;
     }
 
-    bool Won()
-    {
-        if (this.GetPlayersAlive().Count == 1)
-            return true;
-
-        return false;
-    }
-
     GameObject GetWinner()
     {
         return this.GetPlayersAlive()[0];
@@ -95,14 +95,6 @@ public class MyGameManager : NetworkBehaviour
         NetworkServer.SendToAll(MyNetworkManager.MyMsgType.Win, msg);
     }
 
-    bool Ready()
-    {
-        if ((NetworkServer.connections.Count > 1 && this.AmountIA <= 0) ||
-            (NetworkServer.connections.Count > 0 && this.AmountIA > 0))
-            return true;
-        return false;
-    }
-
     public void Exit()
     {
         Application.Quit();
@@ -111,9 +103,11 @@ public class MyGameManager : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (this.started && this.Ready())
+        if (this.GetPlayersAlive().Count > 1)
+            this.ready = true;
+        if (this.started && this.ready)
         {
-            if (this.Won() && this.won == false)
+            if (this.GetPlayersAlive().Count == 1 && this.won == false)
             {
                 this.Win();
             }

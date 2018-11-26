@@ -8,11 +8,10 @@ public class Player : NetworkBehaviour {
     public int bombLimit = 1;
     public GameObject bombPrefab;
     public List<GameObject> bombs;
+    public string pseudo = "Player";
 
-
-    public int NumberPlayer;
+    public int NumberPlayer = 0;
     private bool dead = false;
-    private string pseudo = "Player";
 
 	// Use this for initialization
 	void Start () {

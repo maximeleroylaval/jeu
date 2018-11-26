@@ -1,8 +1,9 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System;
 
 public class MyNetworkManager : NetworkManager {
 
@@ -78,14 +79,12 @@ public class MyNetworkManager : NetworkManager {
             }
         }
 
-        Debug.Log(i);
-
         if (i != -1)
         {
-            NetworkStartPosition[] spawns = GameObject.FindObjectsOfType<NetworkStartPosition>();
+            NetworkStartPosition[] spawns = GameObject.FindObjectsOfType<NetworkStartPosition>().OrderBy(elem => Int32.Parse(elem.name.Substring(0, 1))).ToArray();
             GameObject player = Instantiate(playerPrefab, spawns[i].transform.position, spawns[i].transform.rotation);
             player.GetComponent<Player>().SetPseudo("Player " + (i + 1));
-            player.GetComponent<Player>().NumberPlayer = 0;
+            player.GetComponent<Player>().NumberPlayer = i;
             NetworkServer.AddPlayerForConnection(conn, player, playerControllerId);
             activeSpawns[i] = conn;
         }
@@ -97,6 +96,10 @@ public class MyNetworkManager : NetworkManager {
         {
             activeSpawns[i] = null;
         }
+    }
+
+    public override void OnStopHost()
+    {
         SceneManager.LoadScene("Game");
     }
 

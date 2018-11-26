@@ -1,14 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Networking;
 
 public class MyNetworkManagerHUD : MonoBehaviour {
 
     public GameObject InGameMenu;
     public GameObject OnlineMenu;
     public GameObject SoloMenu;
+    public Text IP;
     public int Port = 1337;
 
     public bool solo;
@@ -29,28 +27,27 @@ public class MyNetworkManagerHUD : MonoBehaviour {
 
     public void StartHost(bool solo)
     {
+        this.solo = solo;
+        this.Display(true);
         MyNetworkManager Manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         Manager.networkPort = Port;
         Manager.StartHost();
-        this.solo = solo;
-        this.Display(true);
     }
 
     public void JoinHost()
     {
+        this.Display(true);
         MyNetworkManager Manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
-        string ip = GameObject.FindWithTag("IP").GetComponent<Text>().text;
-        Manager.networkAddress = ip;
+        Manager.networkAddress = IP.text;
         Manager.networkPort = Port;
         Manager.StartClient();
-        this.Display(true);
     }
 
     public void DisconnectHost()
     {
+        this.Display(false);
         MyNetworkManager Manager = GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManager>();
         Manager.StopHost();
-        this.Display(false);
     }
 
     // Update is called once per frame

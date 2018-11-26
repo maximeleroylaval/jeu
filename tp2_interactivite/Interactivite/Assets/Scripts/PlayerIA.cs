@@ -1,16 +1,22 @@
 ﻿using UnityEngine;
+using System.Linq;
+using UnityEngine.AI;
 
-public class PlayerIA : Player {
-
+public class PlayerIA : Player
+{
     public GameObject player;
 
     private Vector3 lastPos;
+    private float lastTime;
 
     // Use this for initialization
-    void Start() {
+    void Start()
+    {
         this.lastPos = transform.position;
+        this.lastTime = Time.time;
     }
 
+    /*
     Vector3 ChasePlayer()
     {
         if (this.player == null)
@@ -35,7 +41,6 @@ public class PlayerIA : Player {
         else
             return Vector3.zero;
     }
-
     Vector3 HideFromBomb()
     {
         bool check = false;
@@ -70,30 +75,26 @@ public class PlayerIA : Player {
             Vector3 direction = ((transform.rotation * Quaternion.Euler(0, 90, 0)) * transform.rotation) * Vector3.forward;
             return direction;
         }
-        
-
 
         return Vector3.zero;
-    
-    }
-
-    public override Vector3 GetDirection()
-    {
-        // BOMB TOO CLOSE
-        //if (this.bombs.Count > 0 && this.bombs[0] != null && Vector3.Distance(transform.position, this.bombs[0].transform.position) > 0.35)
-            return HideFromBomb();
-        //return ChasePlayer();
-    }
+    }*/
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         Vector3 currentPos = transform.position;
 
-        if (Vector3.Distance(currentPos, lastPos) < 1)
-            CmdBomb();
+        if (Time.time - this.lastTime > 0.6f)
+        {
+            if (Vector3.Distance(this.transform.position, this.lastPos) < 0.1f)
+            {
+                this.CmdBomb();
+            }
+            lastPos = currentPos;
+            this.lastTime = Time.time;
+        }
 
-        Move();
-
-        lastPos = currentPos;
+        if (GameObject.FindGameObjectWithTag("Player") != null)
+            GetComponent<NavMeshAgent>().SetDestination(GameObject.FindGameObjectWithTag("Player").transform.position);
     }
 }

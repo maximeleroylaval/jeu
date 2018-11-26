@@ -269,6 +269,7 @@ GameObject:
   - component: {fileID: 114065686154258966}
   - component: {fileID: 114021089885820258}
   - component: {fileID: 114865166045973532}
+  - component: {fileID: 208395446874247872}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -847,6 +848,8 @@ MonoBehaviour:
   bombLimit: 1
   bombPrefab: {fileID: 1539078274154060, guid: e62b6ce8448327648a046569a9fbf107, type: 2}
   bombs: []
+  pseudo: Player
+  NumberPlayer: 0
 --- !u!114 &114865166045973532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1183,3 +1186,18 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.00089100003, y: 0.5636872, z: -0.012329504}
     m_Extent: {x: 0.141725, y: 0.14076006, z: 0.1406485}
   m_DirtyAABB: 0
+--- !u!208 &208395446874247872
+NavMeshObstacle:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1719456876515790}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 0
+  m_Extents: {x: 0.47, y: 0.85, z: 0.47}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0}
+  m_TimeToStationary: 0.5
