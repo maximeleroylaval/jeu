@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 15
-  productGUID: 6f2a44a9269313b4385de7f79e54845d
+  productGUID: 27ab4a19d5db4ac47b7ecc971814e389
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -424,7 +424,6 @@ PlayerSettings:
   switchAllowsVideoCapturing: 1
   switchAllowsRuntimeAddOnContentInstall: 0
   switchDataLossConfirmation: 0
-  switchUserAccountLockEnabled: 0
   switchSupportedNpadStyles: 3
   switchNativeFsCacheSize: 32
   switchIsHoldTypeHorizontal: 0
@@ -650,8 +649,8 @@ PlayerSettings:
     UNet: 1
   facebookSdkVersion: 7.9.4
   apiCompatibilityLevel: 2
-  cloudProjectId: 6fd81b8a-5fb7-4747-8fe1-6c9ea40ea705
-  projectName: RetroactionAudiovisuelle
+  cloudProjectId: 069b653c-35f3-4085-8779-b45763d889e7
+  projectName: Interactivite (1)
   organizationId: maxime1907
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0

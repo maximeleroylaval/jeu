@@ -3,7 +3,20 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Destructible
+  - Explosive
+  - PlayerIA
+  - GameManager
+  - IP
+  - Connection
+  - Disconnect
+  - NetworkManager
+  - SoloMenu
+  - OnlineMenu
+  - InGameMenu
+  - ChoiceMenu
+  - Bomb
   layers:
   - Default
   - TransparentFX

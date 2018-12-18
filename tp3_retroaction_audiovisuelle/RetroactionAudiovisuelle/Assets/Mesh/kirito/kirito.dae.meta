@@ -1,0 +1,180 @@
+fileFormatVersion: 2
+guid: aba1ef23bc480104796cd874dd4d84aa
+ModelImporter:
+  serializedVersion: 23
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Camera
+    100004: hip
+    100006: //RootNode
+    100008: l_ankle
+    100010: l_elbow
+    100012: l_knee
+    100014: l_shoulder
+    100016: l_thigh
+    100018: l_wrist
+    100020: Lamp
+    100022: mesh0
+    100024: mesh1
+    100026: mesh2
+    100028: mesh3
+    100030: mesh4
+    100032: neck
+    100034: r_ankle
+    100036: r_elbow
+    100038: r_knee
+    100040: r_shoulder
+    100042: r_thigh
+    100044: r_wrist
+    100046: root
+    100048: spine
+    400000: Armature
+    400002: Camera
+    400004: hip
+    400006: //RootNode
+    400008: l_ankle
+    400010: l_elbow
+    400012: l_knee
+    400014: l_shoulder
+    400016: l_thigh
+    400018: l_wrist
+    400020: Lamp
+    400022: mesh0
+    400024: mesh1
+    400026: mesh2
+    400028: mesh3
+    400030: mesh4
+    400032: neck
+    400034: r_ankle
+    400036: r_elbow
+    400038: r_knee
+    400040: r_shoulder
+    400042: r_thigh
+    400044: r_wrist
+    400046: root
+    400048: spine
+    2000000: Camera
+    2100000: assets_textures_Kirito_arm_png
+    2100002: assets_textures_Kirito_body_png
+    2100004: assets_textures_Kirito_legs_png
+    2100006: assets_textures_Kirito_hair_png
+    2100008: assets_textures_Kirito_face_png
+    4300000: mesh0
+    4300002: mesh1
+    4300004: mesh2
+    4300006: mesh3
+    4300008: mesh4
+    9500000: //RootNode
+    10800000: Lamp
+    13700000: mesh0
+    13700002: mesh1
+    13700004: mesh2
+    13700006: mesh3
+    13700008: mesh4
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: assets_textures_Kirito_arm_png
+    second: {fileID: 2100000, guid: a8e7adea779bde44b875b385f515efe3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: assets_textures_Kirito_body_png
+    second: {fileID: 2100000, guid: a83fd746409ea9d439824d7c0ef0e264, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: assets_textures_Kirito_face_png
+    second: {fileID: 2100000, guid: 2e278330a421458499d0b30e7f45a410, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: assets_textures_Kirito_hair_png
+    second: {fileID: 2100000, guid: 01ca33fe9a83aeb449ee3df8e2eee787, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: assets_textures_Kirito_legs_png
+    second: {fileID: 2100000, guid: 537735b53f29a1c418a45d7bb7dca628, type: 2}
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+    materialLocation: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleCurves: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    importAnimatedCustomProperties: 0
+    importConstraints: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    extraUserProperties: []
+    clipAnimations: []
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1
+    meshCompression: 0
+    addColliders: 0
+    importVisibility: 1
+    importBlendShapes: 1
+    importCameras: 1
+    importLights: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    preserveHierarchy: 0
+    indexFormat: 0
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+    previousCalculatedGlobalScale: 1
+    hasPreviousCalculatedGlobalScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+    normalCalculationMode: 4
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    serializedVersion: 2
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+    hasExtraRoot: 0
+    skeletonHasParents: 1
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
