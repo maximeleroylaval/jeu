@@ -16,7 +16,6 @@ public class MyGameManager : NetworkBehaviour
     // Use this for initialization
     void Start()
     {
-
     }
 
     public void GameStartLocal(int players)
@@ -24,6 +23,7 @@ public class MyGameManager : NetworkBehaviour
         GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManagerHUD>().StartHost(true);
         ClientScene.AddPlayer(NetworkClient.allClients[0].connection, 1);
         this.started = true;
+        GenerationEnvironment.GE.GenereateEnvironment();
         this.CmdSpawnIAs();
     }
 

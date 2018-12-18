@@ -68,6 +68,7 @@
     <Compile Include="Assets\Scripts\Destructible.cs" />
     <Compile Include="Assets\Scripts\ElementCommand.cs" />
     <Compile Include="Assets\Scripts\Explosion.cs" />
+    <Compile Include="Assets\Scripts\GenerationEnvironment.cs" />
     <Compile Include="Assets\Scripts\MenuManager.cs" />
     <Compile Include="Assets\Scripts\MyGameManager.cs" />
     <Compile Include="Assets\Scripts\MyNetworkManager.cs" />
