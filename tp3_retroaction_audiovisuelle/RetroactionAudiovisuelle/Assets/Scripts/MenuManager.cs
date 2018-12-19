@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     public GameObject OptionsPanel;
     public GameObject CommandsPanel;
     public GameObject SetNewCommandPanel;
+    private ParticleSystem particle;
 
     Transform menuPanel;
     Event keyEvent;
@@ -22,10 +23,21 @@ public class MenuManager : MonoBehaviour
     {
         ShowMenuPanel();
         InitKeys();
+
+        particle = this.GetComponent<ParticleSystem>();
     }
 
-    void Update() {
-
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            var emitParams = new ParticleSystem.EmitParams();
+            emitParams.position = Input.mousePosition;
+            emitParams.velocity = new Vector3(0.0f, 0.0f, -2.0f);
+            particle.Emit(emitParams, 10);
+            //particle.Stop();
+            //particle.Play();
+        }
     }
 
     void OnGUI()

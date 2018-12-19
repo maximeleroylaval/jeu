@@ -12,7 +12,7 @@ public class ControlManager : MonoBehaviour
 
         if (CM == null)
         {
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
             CM = this;
         }
         else if (CM != this)

@@ -2,20 +2,25 @@
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class Player : NetworkBehaviour {
+public class Player : NetworkBehaviour
+{
 
     public float speed = 2.0f;
     public int bombLimit = 1;
     public GameObject bombPrefab;
     public List<GameObject> bombs;
     public string pseudo = "Player";
+    private Animator controllerAnimation;
 
     public int NumberPlayer = 0;
     private bool dead = false;
 
-	// Use this for initialization
-	void Start () {
-	}
+    // Use this for initialization
+    void Start()
+    {
+        controllerAnimation = GetComponent<Animator>();
+        controllerAnimation.SetFloat("MoveSpeed", 0);
+    }
 
     public virtual bool Dead()
     {
@@ -73,13 +78,19 @@ public class Player : NetworkBehaviour {
         Vector3 direction = this.GetDirection();
         if (direction != Vector3.zero)
         {
+            controllerAnimation.SetFloat("MoveSpeed", 1.0f);
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
             transform.rotation = Quaternion.LookRotation(direction.normalized);
+        }
+        else
+        {
+            controllerAnimation.SetFloat("MoveSpeed", 0);
         }
     }
 
     // Update is called once per frame
-    void Update () {
+    void Update()
+    {
         if (!isLocalPlayer)
             return;
 

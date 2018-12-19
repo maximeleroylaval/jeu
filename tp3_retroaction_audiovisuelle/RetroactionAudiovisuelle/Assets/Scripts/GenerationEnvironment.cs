@@ -30,6 +30,7 @@ public class GenerationEnvironment : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        MeshCube.AddComponent<Destructible>();
     }
 
     // Update is called once per frame

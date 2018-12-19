@@ -433,6 +433,7 @@ Transform:
   - {fileID: 986715400}
   - {fileID: 973046516}
   - {fileID: 288214338}
+  - {fileID: 715583730}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3607,12 +3608,12 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 715583728}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 26.733414, y: 30.236132, z: -0.21189576}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 81.834854, y: 26.047829, z: -5.973168}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_Father: {fileID: 85305738}
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &722381372
 GameObject:
@@ -4723,7 +4724,7 @@ MonoBehaviour:
   m_ScriptCRCCheck: 1
   m_MaxDelay: 0.01
   m_LogLevel: 2
-  m_PlayerPrefab: {fileID: 1719456876515790, guid: 1aa6784938ffa0848ae33daac83bb1d5,
+  m_PlayerPrefab: {fileID: 1636102870341012, guid: dd6861820223c8141a7c0a70f747ccc5,
     type: 2}
   m_AutoCreatePlayer: 1
   m_PlayerSpawnMethod: 0
