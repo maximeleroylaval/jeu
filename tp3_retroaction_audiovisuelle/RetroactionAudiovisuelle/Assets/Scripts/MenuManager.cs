@@ -24,19 +24,22 @@ public class MenuManager : MonoBehaviour
         ShowMenuPanel();
         InitKeys();
 
-        particle = this.GetComponent<ParticleSystem>();
+        particle = GameObject.FindGameObjectWithTag("ParticleMenu").GetComponent<ParticleSystem>();
+        particle.Stop();
     }
 
     void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
-            var emitParams = new ParticleSystem.EmitParams();
-            emitParams.position = Input.mousePosition;
-            emitParams.velocity = new Vector3(0.0f, 0.0f, -2.0f);
-            particle.Emit(emitParams, 10);
-            //particle.Stop();
-            //particle.Play();
+            Vector3 pos = Input.mousePosition;
+            pos.z = 40f;
+
+            GameObject.FindGameObjectWithTag("ParticleMenu").transform.position = Camera.main.ScreenToWorldPoint(pos);
+            particle.Play();
+
+            // PLAY EXPLOSION SOUND HERE
+
         }
     }
 

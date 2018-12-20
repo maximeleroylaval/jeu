@@ -1,20 +1,41 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class UIButton : Selectable {
+public class UIButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+{
+    private Button button;
 
-    BaseEventData m_BaseEvent;
-	// Use this for initialization
-	void Start () {
+    void Start()
+    {
+        button = GetComponent<Button>();
     }
-	
-	// Update is called once per frame
-	void Update () {
-        if (IsHighlighted(m_BaseEvent)) {
-            //Debug.Log("HERE");
-        }
-	}
+
+    public void OnPointerEnter(PointerEventData eventData)
+    {
+        ScalePlus();
+
+    }
+
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        ScaleMoins();
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        ScaleMoins();
+    }
+
+    private void ScalePlus()
+    {
+        Vector2 save = button.image.rectTransform.sizeDelta;
+        button.image.rectTransform.sizeDelta = new Vector2(save.x + 10, save.y + 5);
+    }
+
+    private void ScaleMoins()
+    {
+        Vector2 save = button.image.rectTransform.sizeDelta;
+        button.image.rectTransform.sizeDelta = new Vector2(save.x - 10, save.y - 5);
+    }
 }
