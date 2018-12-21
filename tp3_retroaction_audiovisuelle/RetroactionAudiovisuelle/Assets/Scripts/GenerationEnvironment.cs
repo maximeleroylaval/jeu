@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GenerationEnvironment : MonoBehaviour
 {
     public static GenerationEnvironment GE;
-    public GameObject MeshCube;
     public Text seed;
 
     public float elevation = 0.2f;
@@ -30,7 +29,6 @@ public class GenerationEnvironment : MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        MeshCube.AddComponent<Destructible>();
     }
 
     // Update is called once per frame
@@ -38,15 +36,10 @@ public class GenerationEnvironment : MonoBehaviour
     {
         if (ready)
         {
-
             if (current < width * height - 1)
             {
                 current++;
                 SetEnvironment();
-            }
-            else
-            {
-                Destroy(transform.parent.gameObject);
             }
             
         }
@@ -79,7 +72,9 @@ public class GenerationEnvironment : MonoBehaviour
         if (map[current] == 1)
         {
             if (checkForPlayers())
-                Instantiate(MeshCube, new Vector3(offsetX * (current % width) + beginX, elevation, offsetZ * (current / height) + beginZ), Quaternion.identity);
+            {
+                Instantiate(GameObject.FindGameObjectWithTag("Destructible"), new Vector3(offsetX * (current % width) + beginX, elevation, offsetZ * (current / height) + beginZ), Quaternion.identity);
+            }
         }
     }
 
