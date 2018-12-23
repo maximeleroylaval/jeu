@@ -21,6 +21,9 @@ TagManager:
   - ParticleMenu
   - SoundManager
   - EnvironmentManager
+  - AmbientSlider
+  - EffectSlider
+  - FolleySlider
   layers:
   - Default
   - TransparentFX

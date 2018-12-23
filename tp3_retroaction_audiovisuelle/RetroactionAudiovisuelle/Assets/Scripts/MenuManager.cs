@@ -10,6 +10,7 @@ public class MenuManager : MonoBehaviour
     public GameObject OptionsPanel;
     public GameObject CommandsPanel;
     public GameObject SetNewCommandPanel;
+    public GameObject SoundPanel;
     private ParticleSystem particle;
 
     Transform menuPanel;
@@ -173,6 +174,7 @@ public class MenuManager : MonoBehaviour
         OptionsPanel.SetActive(false);
         CommandsPanel.SetActive(false);
         SetNewCommandPanel.SetActive(false);
+        SoundPanel.SetActive(false);
     }
 
     public void ShowOptionsPanel()
@@ -181,6 +183,7 @@ public class MenuManager : MonoBehaviour
         OptionsPanel.SetActive(true);
         CommandsPanel.SetActive(false);
         SetNewCommandPanel.SetActive(false);
+        SoundPanel.SetActive(false);
     }
 
     public void ShowCommandPanel()
@@ -189,6 +192,17 @@ public class MenuManager : MonoBehaviour
         OptionsPanel.SetActive(false);
         CommandsPanel.SetActive(true);
         SetNewCommandPanel.SetActive(false);
+        SoundPanel.SetActive(false);
+    }
+
+    public void ShowSoundPanel()
+    {
+        MenuPanel.SetActive(false);
+        OptionsPanel.SetActive(false);
+        CommandsPanel.SetActive(false);
+        SetNewCommandPanel.SetActive(false);
+        SoundPanel.SetActive(true);
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().SetSliderValues();
     }
 
     public void Exit()

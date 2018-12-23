@@ -2,8 +2,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SoundManager : MonoBehaviour {
+
+    private static SoundManager instanceRef;
 
     [Serializable]
     public struct MySound
@@ -14,22 +17,46 @@ public class SoundManager : MonoBehaviour {
     }
     public MySound[] sounds;
 
-    public float ambientVolume;
-    public float effectsVolume;
+    public float ambientVolume = 1f;
+    public float effectsVolume = 1f;
+    public float folleyVolume = 1f;
 
     public AudioSource sourceAmbient;
     public AudioSource sourceAmbient2;
     public AudioSource sourceEffect;
+    public AudioSource sourceFolley;
 
     public float fadeSpeed = 0.01f;
 
     private bool transition = false;
 
-    // Use this for initialization
-    void Start () {
-        DontDestroyOnLoad(this);
-	}
+    private Slider ambientSlider;
+    private Slider effectSlider;
+    private Slider folleySlider;
 
+    void Awake()
+    {
+        if (instanceRef == null)
+        {
+            instanceRef = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            DestroyImmediate(gameObject);
+        }
+    }
+
+    public void SetSliderValues()
+    {
+        ambientSlider = GameObject.FindGameObjectWithTag("AmbientSlider").GetComponent<Slider>();
+        effectSlider = GameObject.FindGameObjectWithTag("EffectSlider").GetComponent<Slider>();
+        folleySlider = GameObject.FindGameObjectWithTag("FolleySlider").GetComponent<Slider>();
+
+        ambientSlider.value = ambientVolume;
+        effectSlider.value = effectsVolume;
+        folleySlider.value = folleyVolume;
+    }
     public MySound GetSound(string name)
     {
         foreach (MySound sound in sounds)
@@ -45,7 +72,6 @@ public class SoundManager : MonoBehaviour {
         emptySound.name = "undefined";
         return emptySound;
     }
-
     public void Play(string name)
     {
         MySound sound = this.GetSound(name);
@@ -54,12 +80,10 @@ public class SoundManager : MonoBehaviour {
         else
             sourceEffect.PlayOneShot(sound.clip, effectsVolume);
     }
-
     public void PlayFadeInOut(AudioClip clip, float volume)
     {
         this.StartCoroutine(this.PlayFadeInOutEnum(clip, ambientVolume));
     }
-
     public IEnumerator PlayFadeInOutEnum(AudioClip clip, float volume)
     {
         while (this.transition)
@@ -80,7 +104,8 @@ public class SoundManager : MonoBehaviour {
             sourceAmbient.PlayOneShot(clip, 1f);
         }
 
-        while ((first && (sourceAmbient.volume < volume || sourceAmbient2.volume > 0)) || (!first && (sourceAmbient2.volume < volume || sourceAmbient.volume > 0)))
+        while (((first && (sourceAmbient.volume < volume || sourceAmbient2.volume > 0)) || (!first && (sourceAmbient2.volume < volume || sourceAmbient.volume > 0)))
+            && this.transition)
         {
             if (first)
             {
@@ -102,19 +127,44 @@ public class SoundManager : MonoBehaviour {
 
         this.transition = false;
     }
-
+    public void OnAmbientVolumeChanged()
+    {
+        this.SetAmbientVolume(ambientSlider.value);
+    }
+    public void OnEffectVolumeChanged()
+    {
+        this.SetEffectVolume(effectSlider.value);
+    }
+    public void OnFolleyVolumeChanged()
+    {
+        this.SetFolleyVolume(folleySlider.value);
+    }
+    public void SetAmbientVolume(float value)
+    {
+        ambientVolume = value;
+        sourceAmbient.volume = value;
+        this.transition = false;
+    }
+    public void SetEffectVolume(float value)
+    {
+        effectsVolume = value;
+        sourceEffect.volume = value;
+    }
+    public void SetFolleyVolume(float value)
+    {
+        folleyVolume = value;
+        sourceFolley.volume = value;
+    }
     public void StopAmbient()
     {
         sourceAmbient.Stop();
     }
-
     public void StopEffect()
     {
         sourceEffect.Stop();
     }
-
-    // Update is called once per frame
-    void Update () {
-		
-	}
+    public void StopFolley()
+    {
+        sourceFolley.Stop();
+    }
 }
