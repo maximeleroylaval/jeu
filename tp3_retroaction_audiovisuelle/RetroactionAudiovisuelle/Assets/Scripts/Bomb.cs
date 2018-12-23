@@ -22,6 +22,7 @@ public class Bomb : NetworkBehaviour {
     [Command]
     void CmdExplode()
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("explode");
         for (int i = 0; i < this.range; i++)
         {
             GameObject explosion = Instantiate(explosionPrefab, new Vector3(this.transform.position.x + 1.2f, this.transform.position.y + 0.3f, this.transform.position.z), Quaternion.identity);

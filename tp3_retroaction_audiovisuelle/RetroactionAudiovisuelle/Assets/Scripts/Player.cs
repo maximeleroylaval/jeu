@@ -29,6 +29,7 @@ public class Player : NetworkBehaviour
 
     public virtual void Die()
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("death");
         string toDisplay = this.GetPseudo() + " just died like a noob";
         GameObject.Find("Canvas").GetComponent<Canvas>().GetComponent<TextAnnouncer>().Display(toDisplay);
         this.dead = true;

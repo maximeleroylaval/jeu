@@ -1,10 +1,13 @@
-﻿using System.Threading;
+﻿using System.Collections;
+using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
+using UnityEngine.Networking;
 using UnityEngine.UI;
 
 public class GenerationEnvironment : MonoBehaviour
 {
-    public static GenerationEnvironment GE;
+    public GameObject boxDestroyPrefab;
     public Text seed;
 
     public float elevation = 0.2f;
@@ -13,37 +16,8 @@ public class GenerationEnvironment : MonoBehaviour
     public const int percentFill = 75;
 
     private static int current = 0;
-    private bool ready = false;
 
     int[] map = null;
-
-    private void Awake()
-    {
-
-        if (GE == null)
-        {
-            GE = this;
-        }
-    }
-
-    // Use this for initialization
-    void Start()
-    {
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (ready)
-        {
-            if (current < width * height - 1)
-            {
-                current++;
-                SetEnvironment();
-            }
-            
-        }
-    }
 
     private bool checkForPlayers()
     {
@@ -61,40 +35,39 @@ public class GenerationEnvironment : MonoBehaviour
         return true;
     }
 
-    private void SetEnvironment()
+    public GameObject SetEnvironment()
     {
         float beginX = 4.2f;
         float beginZ = 3.5f;
         float offsetX = -0.83f;
         float offsetZ = -0.84f;
 
-
         if (map[current] == 1)
         {
             if (checkForPlayers())
             {
-                Instantiate(GameObject.FindGameObjectWithTag("Destructible"), new Vector3(offsetX * (current % width) + beginX, elevation, offsetZ * (current / height) + beginZ), Quaternion.identity);
+                Vector3 pos = new Vector3(offsetX * (current % width) + beginX, elevation, offsetZ * (current / height) + beginZ);
+                Quaternion rotation = Quaternion.identity;
+                GameObject gameobject = Instantiate(this.boxDestroyPrefab, pos, rotation);
+                return gameobject;
             }
         }
+        return null;
     }
 
     private void initMap()
     {
-
         map = new int[width * height];
         for (int i = 0; i < width * height; i++)
             map[i] = 0;
-
     }
 
-
-    public void GenereateEnvironment()
+    public List<GameObject> GenerateEnvironment()
     {
         initMap();
         int maxValue = 1000;
 
         Random.InitState(int.Parse(seed.text));
-
         for (int i = 0; i < width * height; i++)
         {
             int rdm = Random.Range(0, maxValue);
@@ -103,6 +76,17 @@ public class GenerationEnvironment : MonoBehaviour
                 map[i] = 1;
             }
         }
-        ready = true;
+
+        List<GameObject> objects = new List<GameObject>();
+        while (current < map.Length - 1)
+        {
+            if (current < width * height - 1)
+            {
+                current++;
+                objects.Add(SetEnvironment());
+            }
+        }
+        current = 0;
+        return objects;
     }
 }

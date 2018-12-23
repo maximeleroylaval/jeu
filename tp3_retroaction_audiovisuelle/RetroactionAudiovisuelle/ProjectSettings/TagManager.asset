@@ -19,6 +19,8 @@ TagManager:
   - Bomb
   - UIButton
   - ParticleMenu
+  - SoundManager
+  - EnvironmentManager
   layers:
   - Default
   - TransparentFX

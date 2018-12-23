@@ -114,8 +114,10 @@ public class MyNetworkManager : NetworkManager {
         if (msg.win)
         {
             TextAnnouncer announcer = GameObject.Find("Canvas").GetComponent<Canvas>().GetComponent<TextAnnouncer>();
-            Invoke("Restart", announcer.displayTime);
-            announcer.Display(msg.toDisplay);
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("win");
+            float displayTime = GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().GetSound("win").clip.length;
+            Invoke("Restart", displayTime);
+            announcer.DisplayWithTime(msg.toDisplay, displayTime);
         }
     }
 

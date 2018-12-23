@@ -21,6 +21,7 @@ public class MenuManager : MonoBehaviour
 
     void Start()
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("menu_ambient");
         ShowMenuPanel();
         InitKeys();
 
@@ -38,8 +39,7 @@ public class MenuManager : MonoBehaviour
             GameObject.FindGameObjectWithTag("ParticleMenu").transform.position = Camera.main.ScreenToWorldPoint(pos);
             particle.Play();
 
-            // PLAY EXPLOSION SOUND HERE
-
+            GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("menu_choose");
         }
     }
 
@@ -197,6 +197,7 @@ public class MenuManager : MonoBehaviour
     }
     public void LaunchGame()
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("game_ambient");
         SceneManager.LoadScene("Scenes/Game");
     }
 }

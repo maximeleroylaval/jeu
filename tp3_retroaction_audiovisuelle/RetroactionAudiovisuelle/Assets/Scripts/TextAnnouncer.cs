@@ -6,25 +6,35 @@ public class TextAnnouncer : MonoBehaviour {
     public float displayTime = 2f;
     public Text canvasText;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+
+    private bool displaying = false;
+    private bool displaying2 = false;
 
     public void Display(string toDisplay)
     {
+        this.DisplayWithTime(toDisplay, this.displayTime);
+    }
+
+    public void DisplayWithTime(string toDisplay, float myDisplayTime)
+    {
         this.ClearText();
         canvasText.text = toDisplay;
-        Invoke("ClearText", this.displayTime);
+        if (this.displaying)
+            this.displaying2 = true;
+        else
+            displaying = true;
+        Invoke("ClearText", myDisplayTime);
     }
 
     public void ClearText()
     {
-        canvasText.text = string.Empty;
+        if ((this.displaying && !this.displaying2) || (!this.displaying && this.displaying2) || (!this.displaying && !this.displaying2))
+        {
+            canvasText.text = string.Empty;
+        }
+        else
+        {
+            this.displaying = false;
+        }
     }
 }

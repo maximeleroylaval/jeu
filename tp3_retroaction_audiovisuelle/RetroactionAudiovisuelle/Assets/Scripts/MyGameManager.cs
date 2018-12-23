@@ -13,18 +13,14 @@ public class MyGameManager : NetworkBehaviour
     private bool won = false;
     private bool ready = false;
 
-    // Use this for initialization
-    void Start()
-    {
-    }
-
     public void GameStartLocal(int players)
     {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("ingame_ambient");
         GameObject.FindGameObjectWithTag("NetworkManager").GetComponent<MyNetworkManagerHUD>().StartHost(true);
         ClientScene.AddPlayer(NetworkClient.allClients[0].connection, 1);
         this.started = true;
-        GenerationEnvironment.GE.GenereateEnvironment();
         this.CmdSpawnIAs();
+        this.CmdSpawnEnv();
     }
 
     public void ToggleIA()
@@ -33,22 +29,37 @@ public class MyGameManager : NetworkBehaviour
     }
 
     [Command]
+    public void CmdGameStart(bool isServer)
+    {
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("ingame_ambient");
+        if (isServer)
+        {
+            this.CmdSpawnIAs();
+            this.CmdSpawnEnv();
+        }
+        this.started = true;
+    }
+
+    [Command]
+    void CmdSpawnEnv()
+    {
+        List<GameObject> map = GameObject.FindGameObjectWithTag("EnvironmentManager").GetComponent<GenerationEnvironment>().GenerateEnvironment();
+        foreach (GameObject gameobject in map)
+        {
+            if (gameobject != null)
+                NetworkServer.Spawn(gameobject);
+        }
+    }
+
+    [Command]
     void CmdSpawnIAs()
     {
         for (int i = 0; i < this.AmountIA; i++)
         {
             GameObject IA = Instantiate(PlayerIAPrefab, SpawnPoint.transform.position, Quaternion.identity);
-            this.playerIAs.Add(IA);
             NetworkServer.Spawn(IA);
+            this.playerIAs.Add(IA);
         }
-    }
-
-    [Command]
-    public void CmdGameStart(bool isServer)
-    {
-        if (isServer)
-            this.CmdSpawnIAs();
-        this.started = true;
     }
 
     List<GameObject> GetPlayersAlive()
@@ -82,6 +93,7 @@ public class MyGameManager : NetworkBehaviour
         manager.StopHost();
         this.started = false;
         this.won = false;
+        GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("game_ambient");
     }
 
     void Win()
