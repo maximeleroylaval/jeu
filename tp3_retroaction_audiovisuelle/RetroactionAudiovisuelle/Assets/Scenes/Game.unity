@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657826, g: 0.49641263, b: 0.57481676, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3661,7 +3661,7 @@ MonoBehaviour:
   - {fileID: 1539078274154060, guid: e62b6ce8448327648a046569a9fbf107, type: 2}
   - {fileID: 1050376466377234, guid: cd3da48ff5fcbf24789c85c561f43de2, type: 2}
   - {fileID: 1792577296176272, guid: beb7f757a05b5894d9afcb0ccca2c371, type: 2}
-  - {fileID: 1332401696856736, guid: 7d5472e399c72f94a82ad85f231af802, type: 2}
+  - {fileID: 1186720465427040, guid: e59aa8a7ef160994ca814aacabd1c619, type: 2}
   m_CustomConfig: 0
   m_MaxConnections: 4
   m_ConnectionConfig:
@@ -3760,7 +3760,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SpawnPoint: {fileID: 970836750}
-  PlayerIAPrefab: {fileID: 1332401696856736, guid: 7d5472e399c72f94a82ad85f231af802,
+  PlayerIAPrefab: {fileID: 1186720465427040, guid: e59aa8a7ef160994ca814aacabd1c619,
     type: 2}
   AmountIA: 0
 --- !u!4 &986715400

@@ -19,7 +19,6 @@ public class Player : NetworkBehaviour
     void Start()
     {
         controllerAnimation = GetComponent<Animator>();
-        controllerAnimation.SetFloat("MoveSpeed", 0);
     }
 
     public virtual bool Dead()
@@ -27,13 +26,21 @@ public class Player : NetworkBehaviour
         return this.dead;
     }
 
+    public void SetInactive()
+    {
+        this.gameObject.SetActive(false);
+    }
+
     public virtual void Die()
     {
+        controllerAnimation.SetTrigger("Dead");
         GameObject.FindGameObjectWithTag("SoundManager").GetComponent<SoundManager>().Play("death");
         string toDisplay = this.GetPseudo() + " just died like a noob";
         GameObject.Find("Canvas").GetComponent<Canvas>().GetComponent<TextAnnouncer>().Display(toDisplay);
         this.dead = true;
-        this.gameObject.SetActive(false);
+
+        Invoke("SetInactive", 3f);
+
     }
 
     public virtual Vector3 GetDirection()
@@ -77,15 +84,16 @@ public class Player : NetworkBehaviour
     public virtual void Move()
     {
         Vector3 direction = this.GetDirection();
+
         if (direction != Vector3.zero)
         {
-            controllerAnimation.SetFloat("MoveSpeed", 1.0f);
+            controllerAnimation.SetFloat("MoveSpeed", 1f);
             transform.Translate(Vector3.forward * Time.deltaTime * speed);
             transform.rotation = Quaternion.LookRotation(direction.normalized);
         }
         else
         {
-            controllerAnimation.SetFloat("MoveSpeed", 0);
+            controllerAnimation.SetFloat("MoveSpeed", 0f);
         }
     }
 
