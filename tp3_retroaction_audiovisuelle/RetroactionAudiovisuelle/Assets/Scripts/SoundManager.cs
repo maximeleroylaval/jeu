@@ -53,6 +53,10 @@ public class SoundManager : MonoBehaviour {
         effectSlider = GameObject.FindGameObjectWithTag("EffectSlider").GetComponent<Slider>();
         folleySlider = GameObject.FindGameObjectWithTag("FolleySlider").GetComponent<Slider>();
 
+        ambientSlider.onValueChanged.AddListener(delegate { this.OnAmbientVolumeChanged();  });
+        effectSlider.onValueChanged.AddListener(delegate { this.OnEffectVolumeChanged(); });
+        folleySlider.onValueChanged.AddListener(delegate { this.OnFolleyVolumeChanged(); });
+
         ambientSlider.value = ambientVolume;
         effectSlider.value = effectsVolume;
         folleySlider.value = folleyVolume;
